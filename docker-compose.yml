@@ -5,7 +5,6 @@ services:
       POSTGRES_PASSWORD: "15061007"
       POSTGRES_USER: "postgres"
       POSTGRES_DB: "nwc_db"
-      DATABASE_HOST: localhost
     volumes:
       - ./pgdata/db:/var/lib/postgresql/data
     ports:

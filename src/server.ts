@@ -3,6 +3,7 @@ import { Connection, createConnection } from "typeorm";
 import connectionOptions from "./ormconfig";
 
 async function start() {
+  await connectDb();
   const app = express();
   const PORT = 4000;
   app.get("/", (req, res) => res.send("Express + TypeScript Server"));
