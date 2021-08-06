@@ -5,10 +5,12 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { isCnpj } from "../helper/document.validator";
 
 @Entity()
 export class Company {
   @PrimaryColumn()
+  @isCnpj({ message: "CNPJ inválido!" })
   CNPJ: string;
 
   @Column({ nullable: true })
@@ -23,7 +25,5 @@ export class Company {
   constructor(CNPJ: string, name: string, createdAt: Date, updatedAt: Date) {
     this.CNPJ = CNPJ;
     this.name = name;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
   }
 }

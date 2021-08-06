@@ -1,15 +1,14 @@
-import express from "express";
 import { Connection, createConnection } from "typeorm";
 import connectionOptions from "./ormconfig";
 
 async function start() {
-  await connectDb();
-  const app = express();
-  const PORT = 4000;
-  app.get("/", (req, res) => res.send("Express + TypeScript Server"));
-  app.listen(PORT, () => {
-    console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
-  });
+  //await connectDb();
+  // const app = express();
+  // const PORT = 4000;
+  // app.get("/", (req, res) => res.send("Express + TypeScript Server"));
+  // app.listen(PORT, () => {
+  //   console.log(`⚡️[server]: Server is running at http://localhost:${PORT}`);
+  // });
 }
 
 async function connectDb(retries = 5): Promise<Connection> {

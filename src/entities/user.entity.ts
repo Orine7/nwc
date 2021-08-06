@@ -16,11 +16,13 @@ import {
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { isCpf } from "../helper/document.validator";
 import { Company } from "./company.entity";
 
 @Entity()
 export class User {
   @PrimaryColumn()
+  @isCpf({ message: "CPF inválido!" })
   CPF: string;
 
   @Column()
@@ -60,8 +62,6 @@ export class User {
     lastPurchaseValue: number,
     meanPurchaseValue: number,
     lastPurchaseDate: Date,
-    createdAt: Date,
-    updatedAt: Date,
     mostBoughtCompany: Company[],
     lastBoughtCompany: Company[]
   ) {
@@ -71,8 +71,6 @@ export class User {
     this.lastPurchaseValue = lastPurchaseValue;
     this.meanPurchaseValue = meanPurchaseValue;
     this.lastPurchaseDate = lastPurchaseDate;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
     this.mostBoughtCompany = mostBoughtCompany;
     this.lastBoughtCompany = lastBoughtCompany;
   }
