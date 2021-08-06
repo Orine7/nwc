@@ -7,7 +7,6 @@
     "moduleResolution": "node", // Tell tsc to look in node_modules for modules
     "sourceMap": true,          // Creates *.js.map files
     "strict": true,             // Strict types, eg. prohibits `var x=0; x=null`
-    "alwaysStrict": true ,
     "rootDir": "./src",
     "outDir": "./dist",
     "esModuleInterop": true,     // Changes default import rule, from "* as x from y" to "x from y"
