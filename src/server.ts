@@ -1,8 +1,10 @@
 import { Connection, createConnection } from "typeorm";
 import connectionOptions from "./ormconfig";
+import { seedFrom } from "./seeder";
 
 async function start() {
-  //await connectDb();
+  await connectDb();
+  await seedFrom("./src/seed/cleanedSeed.csv");
   // const app = express();
   // const PORT = 4000;
   // app.get("/", (req, res) => res.send("Express + TypeScript Server"));

@@ -25,7 +25,7 @@ export class User {
   @isCpf({ message: "CPF inválido!" })
   CPF: string;
 
-  @Column({ name: "CPF" })
+  @Column({ name: "PRIVADO" })
   private: boolean;
 
   @Column({ name: "INCOMPLETO" })
