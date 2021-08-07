@@ -9,11 +9,11 @@ import { isCnpj } from "../helper/document.validator";
 
 @Entity()
 export class Company {
-  @PrimaryColumn()
+  @PrimaryColumn({ name: "CNPJ", unique: true })
   @isCnpj({ message: "CNPJ inválido!" })
   CNPJ: string;
 
-  @Column({ nullable: true })
+  @Column({ name: "NOME", nullable: true })
   name: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })
@@ -22,7 +22,7 @@ export class Company {
   @UpdateDateColumn({ name: "updated_at", type: "timestamp" })
   updatedAt: Date;
 
-  constructor(CNPJ: string, name: string, createdAt: Date, updatedAt: Date) {
+  constructor(CNPJ: string, name: string) {
     this.CNPJ = CNPJ;
     this.name = name;
   }

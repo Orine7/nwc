@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import { join } from "path";
 import { ConnectionOptions } from "typeorm";
+import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 dotenv.config({ path: ".env" });
 
 const connectionOptions: ConnectionOptions = {
@@ -17,6 +18,7 @@ const connectionOptions: ConnectionOptions = {
     entitiesDir: "src/entities",
   },
   synchronize: false,
+  namingStrategy: new SnakeNamingStrategy(),
 };
 
 export = connectionOptions;

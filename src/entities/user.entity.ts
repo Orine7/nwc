@@ -21,23 +21,23 @@ import { Company } from "./company.entity";
 
 @Entity()
 export class User {
-  @PrimaryColumn()
+  @PrimaryColumn({ name: "CPF", unique: true })
   @isCpf({ message: "CPF inválido!" })
   CPF: string;
 
-  @Column()
+  @Column({ name: "CPF" })
   private: boolean;
 
-  @Column()
+  @Column({ name: "INCOMPLETO" })
   unfinished: boolean;
 
-  @Column({ nullable: true })
+  @Column({ name: "TICKET_MEDIO", nullable: true })
   lastPurchaseValue: number;
 
-  @Column({ nullable: true })
+  @Column({ name: "TICKET_DA_ULTIMA_COMPRA", nullable: true })
   meanPurchaseValue: number;
 
-  @Column({ nullable: true })
+  @Column({ name: "DATA_DA_ULTIMA_COMPRA", nullable: true })
   lastPurchaseDate: Date;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })
@@ -48,11 +48,11 @@ export class User {
 
   //Relations
   @ManyToMany(() => Company)
-  @JoinTable()
+  @JoinTable({ name: "LOJA_MAIS_FREQUENTE" })
   mostBoughtCompany: Company[];
 
   @ManyToMany(() => Company)
-  @JoinTable()
+  @JoinTable({ name: "LOJA_DA_ULTIMA_COMPRA" })
   lastBoughtCompany: Company[];
 
   constructor(
