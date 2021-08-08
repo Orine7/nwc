@@ -1,10 +1,10 @@
 import { Connection, createConnection } from "typeorm";
 import connectionOptions from "./ormconfig";
-import { seedFrom } from "./seeder";
+import { seeder } from "./seeder";
 
 async function start() {
   await connectDb();
-  await seedFrom("./src/seed/cleanedSeed.csv");
+  await seeder("./src/seed/cleanedSeed.csv");
   // const app = express();
   // const PORT = 4000;
   // app.get("/", (req, res) => res.send("Express + TypeScript Server"));
@@ -24,7 +24,7 @@ async function connectDb(retries = 5): Promise<Connection> {
       await new Promise((res) => setTimeout(res, 10000));
     }
   }
-  throw new Error("Error ao se conectar com o banco");
+  throw new Error("Error connecting to the db");
 }
 
 start();

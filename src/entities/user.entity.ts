@@ -1,18 +1,8 @@
-// CPF
-// PRIVATE
-// INCOMPLETO
-// DATA DA ÚLTIMA COMPRA
-// TICKET MÉDIO
-// TICKET DA ÚLTIMA
-// COMPRA LOJA MAIS FREQUÊNTE
-// LOJA DA ÚLTIMA COMPRA
-
 import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  ManyToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -32,46 +22,24 @@ export class User {
   unfinished: boolean;
 
   @Column({ name: "TICKET_MEDIO", nullable: true })
-  lastPurchaseValue: number;
+  lastPurchaseValue?: number;
 
   @Column({ name: "TICKET_DA_ULTIMA_COMPRA", nullable: true })
-  meanPurchaseValue: number;
+  meanPurchaseValue?: number;
 
   @Column({ name: "DATA_DA_ULTIMA_COMPRA", nullable: true })
-  lastPurchaseDate: Date;
+  lastPurchaseDate?: Date;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn({ name: "updated_at", type: "timestamp" })
-  updatedAt: Date;
+  updatedAt?: Date;
 
   //Relations
-  @ManyToMany(() => Company)
-  @JoinTable({ name: "LOJA_MAIS_FREQUENTE" })
-  mostBoughtCompany: Company[];
+  @ManyToOne(() => Company, (company) => company.CNPJ)
+  mostBoughtCompany?: Company;
 
-  @ManyToMany(() => Company)
-  @JoinTable({ name: "LOJA_DA_ULTIMA_COMPRA" })
-  lastBoughtCompany: Company[];
-
-  constructor(
-    CPF: string,
-    isPrivate: boolean,
-    unfinished: boolean,
-    lastPurchaseValue: number,
-    meanPurchaseValue: number,
-    lastPurchaseDate: Date,
-    mostBoughtCompany: Company[],
-    lastBoughtCompany: Company[]
-  ) {
-    this.CPF = CPF;
-    this.private = isPrivate;
-    this.unfinished = unfinished;
-    this.lastPurchaseValue = lastPurchaseValue;
-    this.meanPurchaseValue = meanPurchaseValue;
-    this.lastPurchaseDate = lastPurchaseDate;
-    this.mostBoughtCompany = mostBoughtCompany;
-    this.lastBoughtCompany = lastBoughtCompany;
-  }
+  @ManyToOne(() => Company, (company) => company.CNPJ)
+  lastBoughtCompany?: Company;
 }

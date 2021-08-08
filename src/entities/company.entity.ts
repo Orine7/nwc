@@ -14,16 +14,11 @@ export class Company {
   CNPJ: string;
 
   @Column({ name: "NOME", nullable: true })
-  name: string;
+  name?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn({ name: "updated_at", type: "timestamp" })
-  updatedAt: Date;
-
-  constructor(CNPJ: string, name: string) {
-    this.CNPJ = CNPJ;
-    this.name = name;
-  }
+  updatedAt?: Date;
 }
