@@ -13,7 +13,7 @@ export class Company {
   @isCnpj({ message: "CNPJ inválido!" })
   CNPJ: string;
 
-  @Column({ name: "NOME", nullable: true })
+  @Column({ name: "nome", nullable: true })
   name?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })

@@ -15,19 +15,19 @@ export class User {
   @isCpf({ message: "CPF inválido!" })
   CPF: string;
 
-  @Column({ name: "PRIVADO" })
+  @Column({ name: "privado" })
   private: boolean;
 
-  @Column({ name: "INCOMPLETO" })
+  @Column({ name: "incompleto" })
   unfinished: boolean;
 
-  @Column({ name: "TICKET_MEDIO", nullable: true })
+  @Column({ name: "ticket_medio", nullable: true })
   lastPurchaseValue?: number;
 
-  @Column({ name: "TICKET_DA_ULTIMA_COMPRA", nullable: true })
+  @Column({ name: "ticket_da_ultima_compra", nullable: true })
   meanPurchaseValue?: number;
 
-  @Column({ name: "DATA_DA_ULTIMA_COMPRA", nullable: true })
+  @Column({ name: "data_da_ultima_compra", nullable: true })
   lastPurchaseDate?: Date;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })
