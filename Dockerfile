@@ -4,8 +4,14 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 COPY . .
+COPY run.sh /usr/local/bin/run.sh
+RUN chmod +x /usr/local/bin/run.sh
 
 EXPOSE 4000
-CMD ["npm","start"]
+
+CMD ["run.sh"]
+
+
+
 
 
