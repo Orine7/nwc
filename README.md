@@ -29,8 +29,7 @@ To complete it, I got every word of every line and joined with commas to store i
 As the objectives suggest, I used postgres database in this project. Creation and handling of the data was made with [TypeORM](https://typeorm.io/#/) , an Orm library for typescript and javascript.
 With Typeorm I created 2 entities(tables), User and Company, where user would store the bulk of the data and the company would serve as an complement.
 
-```mermaid
-erDiagram
+```
 User {
 	string CPF
 	boolean private
@@ -38,18 +37,18 @@ User {
 	number lastPurchaseValue
 	number meanPurchaseValue
 	date lastPurchaseDate
-	string mostBoughtCompany
-	string lastBoughtCompany
+	string mostBoughtCompany -> (CNPJ from Company)
+	string lastBoughtCompany -> (CNPJ from Company)
 	date createdAt
 	date updatedAt
 }
+
 Company {
 	string CPF
 	string name
 	date createdAt
 	date updatedAt
 }
-User }|--||Company : have
 ```
 
 As you can see, it's a very simple relationship were in the lastBoughtCompany and mostBoughtCompany the user can relate to a company, therefore the company can have many users but they can only store one value of it.
@@ -91,6 +90,7 @@ This will create your postgres server, and then populate it.
 To get a sense if this simple instructions actually worked you can do one of two things(or both of them if you want to be sure):
 
 1.  Check your database
+
     Go to your preferable DB viewer( I use [DBeaver](https://dbeaver.io/) ) and create a new connection. If you looked into the code, you found the connection options in the .yml file. But if you didn't find anything you can try to use the standard connection option as the docker is exposing 5432 port.
 
     > Standard connection options is as it follows:
@@ -100,8 +100,9 @@ To get a sense if this simple instructions actually worked you can do one of two
     > Host: localhost
 
 2.  Check the Container
+
     In your terminal, run:
 
             docker-compose logs nwc
 
-        If everything has runned correctly, you should see an "Done!" log at the end.
+    If everything has runned correctly, you should see an "Done!" log at the end.
