@@ -2,11 +2,12 @@
   "name": "nwc",
   "version": "1.0.0",
   "description": "This repo is focused on creating a relational DB using Node",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "ts-node ./src/server.ts",
+    "start:prod": "node dist/server",
     "seedCleaner": "ts-node ./src/helper/seedCleaner.ts",
     "seeder": "ts-node ./src/seeder.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config ./src/ormconfig.ts",

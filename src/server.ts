@@ -1,10 +1,14 @@
 import { Connection, createConnection } from "typeorm";
+import { User } from "./entities/user.entity";
 import connectionOptions from "./ormconfig";
 import { seeder } from "./seeder";
 
 async function start() {
-  await connectDb();
-  await seeder("./src/seed/cleanedSeed.csv");
+  const connnection = await connectDb();
+  const users = await connnection.getRepository(User).find();
+  //check if DB is already populated
+  if (!(users.length > 0)) await seeder("./src/seed/cleanedSeed.csv");
+  console.log("Done!");
 }
 
 async function connectDb(retries = 5): Promise<Connection> {

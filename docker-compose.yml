@@ -9,8 +9,17 @@ services:
       - ./pgdata/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  web:
+  nwc:
+    container_name: nwc
     image: nwc
+    environment:
+      POSTGRES_PASSWORD: "15061007"
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "nwc_db"
+      DATABASE_HOST: "db"
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     depends_on:
       - db
     ports:
