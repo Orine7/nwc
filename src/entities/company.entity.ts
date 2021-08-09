@@ -13,7 +13,7 @@ export class Company {
   @isCnpj({ message: "CNPJ inválido!" })
   CNPJ: string;
 
-  @Column({ name: "nome", nullable: true })
+  @Column({ nullable: true })
   name?: string;
 
   @CreateDateColumn({ name: "created_at", type: "timestamp" })
@@ -21,4 +21,9 @@ export class Company {
 
   @UpdateDateColumn({ name: "updated_at", type: "timestamp" })
   updatedAt?: Date;
+
+  constructor(data: { cnpj: string; name?: string }) {
+    this.CNPJ = data?.cnpj;
+    this.name = data?.name;
+  }
 }

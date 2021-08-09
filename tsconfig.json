@@ -16,6 +16,6 @@
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export. This does not affect code emit, just typechecking.
   },
-  "include": ["./src/**/*.ts", "node_modules/tslib/seedCleaner.ts"], // Where typescript will search his .ts files
+  "include": ["./src/**/*.ts"], // Where typescript will search his .ts files
   "exclude": ["node_modules", "pgdata"], // Folders that typescript won't search
 }

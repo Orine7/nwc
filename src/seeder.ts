@@ -39,9 +39,10 @@ async function seedCompanies(lines: string[]) {
   const companies: Company[] = [];
   for (const [index, cnpj] of cnpjs.entries()) {
     try {
-      const new_Company = new Company();
-      new_Company.CNPJ = cnpj;
-      new_Company.name = `Generic Company ${index + 1}`;
+      const new_Company = new Company({
+        cnpj: cnpj,
+        name: `Generic Company ${index + 1}`,
+      });
       const validationErrors = await validate(new_Company);
       if (validationErrors.length > 0) throw new Error("Validation error");
       companies.push(new_Company);
@@ -73,22 +74,30 @@ function findUniqueCnpj(lines: string[]) {
 async function lineToUser(line: string): Promise<User> {
   const line_values: any[] = line.split(",");
   line_values.forEach((value, index) => {
-    if (value === "1") line_values[index] = true;
-    else if (value === "0") line_values[index] = false;
     if (value.toLowerCase() === "null") line_values[index] = null;
   });
-  const newUser = new User();
-  newUser.CPF = line_values[0];
-  newUser.private = line_values[1];
-  newUser.unfinished = line_values[2];
-  newUser.lastPurchaseDate = line_values[3]
-    ? new Date(line_values[3])
-    : undefined;
-  newUser.meanPurchaseValue = line_values[4];
-  newUser.lastPurchaseValue = line_values[5];
-  newUser.mostBoughtCompany = line_values[6];
-  newUser.lastBoughtCompany = line_values[7];
 
+  const [
+    CPF,
+    isPrivate,
+    unfinished,
+    lastPurchaseDate,
+    meanPurchaseValue,
+    lastPurchaseValue,
+    mostBoughtCompany,
+    lastBoughtCompany,
+  ] = line_values;
+
+  const newUser = new User({
+    CPF,
+    isPrivate,
+    unfinished,
+    lastPurchaseDate,
+    lastPurchaseValue,
+    meanPurchaseValue,
+    mostBoughtCompany,
+    lastBoughtCompany,
+  });
   const validationErrors = await validate(newUser);
   if (validationErrors.length > 0) throw newUser;
   return newUser;
